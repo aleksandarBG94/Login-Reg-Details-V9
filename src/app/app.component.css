@@ -1,0 +1,17 @@
+/* .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.col-lg-4.mb-4 {
+    background-color: #f8f9fa;  
+} */
+
+.navbar-brand {
+    margin-left: 10px;
+}
+
+.navbar-expand-lg {
+    background: linear-gradient(rgb(70, 198, 236), rgb(58, 141, 236), rgb(58, 141, 236));
+}

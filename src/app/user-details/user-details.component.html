@@ -1,0 +1,63 @@
+<div class="container container mt-5 mb-5 shadow p-3 mb-5 bg-white rounded col-lg-4">
+    <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" formControlName="username">
+      </div>
+      <div *ngIf="errorMessage && userDetailsForm.get('username')!.touched" class="alert alert-warning">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="userDetailsForm.get('username')!.touched && userDetailsForm.get('username')!.invalid" class="alert alert-danger">
+        Max 40 characters.
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-group">
+          <input [type]="showPassword ? 'text' : 'password'" id="password" class="form-control" formControlName="password">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+              <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="userDetailsForm.get('password')!.touched && userDetailsForm.get('password')!.invalid" class="alert alert-danger">
+        Min 6 characters. Max 40 characters.
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="input-group">
+          <input [type]="showPassword ? 'text' : 'password'" id="confirmPassword" class="form-control" formControlName="confirmPassword">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+              <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            </button>
+          </div>
+        </div>
+        <div *ngIf="userDetailsForm.get('confirmPassword')!.touched && userDetailsForm.get('confirmPassword')!.invalid" class="alert alert-danger">
+          Please confirm the password.
+        </div>
+        <div *ngIf="userDetailsForm.errors?.['notSame'] && userDetailsForm.get('confirmPassword')?.touched" class="alert alert-danger">
+          Passwords must match.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" class="form-control" id="phone" formControlName="phone">
+      </div>
+      <div *ngIf="userDetailsForm.get('phone')!.touched && userDetailsForm.get('phone')!.invalid" class="alert alert-danger">
+        Max 15 digits.
+      </div>
+      <div class="form-group">
+        <label for="country">Country</label>
+        <select class="form-control" id="country" formControlName="country">
+          <option value="">Select a country</option>
+          <option value="UK">UK</option>
+          <option value="Bulgaria">Bulgaria</option>
+          <option value="Germany">Germany</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!canSubmit">Update Details</button>
+    </form>
+    <button class="btn btn-warning" (click)="logout()">Logout</button>
+</div>
