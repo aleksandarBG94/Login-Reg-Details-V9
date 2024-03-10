@@ -16,7 +16,8 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, private router: Router, private AuthService: AuthService) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required]],
+      rememberMe: [false]
     });
   }
 
@@ -28,10 +29,15 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const username = this.loginForm.get('username')?.value;
       const password = this.loginForm.get('password')?.value;
+      const rememberMe = this.loginForm.get('rememberMe')?.value;
       const loginSuccess = this.AuthService.login(username, password);
       if (loginSuccess) {
+        if (rememberMe) {
+            localStorage.setItem('rememberMe', username);
+          }
         this.router.navigate(['/user-details']);
-      } else {
+      }
+       else {
         this.errorMessage = 'Username or password is incorrect';
       }
     }
