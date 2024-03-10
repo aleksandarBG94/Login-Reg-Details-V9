@@ -21,8 +21,8 @@ export class RegistrationComponent {
   constructor(private fb: FormBuilder, private router: Router) {
     this.registrationForm = this.fb.group({
       username: ['', [Validators.required, Validators.maxLength(40)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
-      confirmPassword: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+      confirmPassword: ['', [Validators.required, Validators.maxLength(40)]],
       email: ['', [Validators.required, Validators.email, Validators.maxLength(40)]],
       phone: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.maxLength(15)]],
       country: ['', [Validators.required]]
